@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#182322">
+    <meta name="description"
+        content="AutoParts Hub — a Kenyan auto-parts shopping website. Find parts by vehicle, browse essentials and checkout.">
+    <title>AutoParts Hub | The right part. The road ahead.</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="wrap header-main"><a class="logo" href="#" aria-label="AutoParts Hub home"><span
+                    class="logo-mark">A</span><span>AUTOPARTS<span class="logo-sub">HUB <i>KEEP
+                            MOVING.</i></span></span></a>
+            <form class="search"
+                onsubmit="event.preventDefault();searchProducts();document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">
+                <button type="submit" aria-label="Search">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="10.5" cy="10.5" r="6.5" />
+                    <path d="m16 16 5 5" />
+                </svg></button><input id="searchInput" type="search" placeholder="Search by part name, category or part number…"
+                    aria-label="Search spare parts"></form>
+            <div class="header-actions"><button onclick="openAccount()" aria-label="My account"><svg
+                        viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 22v-3a8 8 0 0 1 16 0v3" />
+                    </svg><span>My account</span></button><button onclick="openCart()" class="cart-head"
+                    aria-label="Open shopping cart"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+</svg>
+<span>Cart</span><b id="cartCount">0</b></button></div>
+        </div>
+    </header>
+    <nav class="wrap">
+            <div class="navlinks"><a href="#shop">Shop all parts</a><button
+                    onclick="chooseCategory('Brakes')">Brakes</button><button onclick="chooseCategory('Engine')">Engine
+                    parts</button><button onclick="chooseCategory('Suspension')">Suspension</button><button
+                    onclick="chooseCategory('Filters')">Filters & fluids</button></div><button onclick="openTracker()"
+                class="track-link"><span>Track your order</span></button>
+        </nav>
+    <main>
+        <section class="hero">
+            <div class="hero-photo"></div>
+            <div class="wrap hero-content">
+                <div class="eyebrow"><span></span> YOUR NEXT MILE STARTS HERE</div>
+                <h1>The right part.<br>For the <em>road ahead.</em></h1>
+                <p>Less searching. More driving. Find the parts your<br class="desktop"> vehicle needs, all in one
+                    place.</p><a class="btn" href="#shop">Explore parts</a>
+                <div class="hero-foot"><span>EVERYDAY ESSENTIALS</span></div>
+            </div>
+        </section>
+        <section class="wrap vehicle-wrap" aria-labelledby="vehicleTitle">
+            <div class="vehicle-finder">
+                <div class="vehicle-intro"><span class="mini-label">LET’S FIND YOUR FIT</span>
+                    <h2 id="vehicleTitle">What do you drive?</h2>
+                    <p>Start with your vehicle.</p>
+                </div>
+                <div class="vehicle-fields"><label><span>Make</span><select id="makeSelect"
+                            aria-label="Vehicle make">
+                            <option value="">Select make</option>
+                            <option>Toyota</option>
+                            <option>Nissan</option>
+                            <option>Mazda</option>
+                        </select></label><label><span>Model</span><select id="modelSelect"
+                            aria-label="Vehicle model">
+                            <option value="">Select model</option>
+                        </select></label><label><span>Year</span><select id="yearSelect" aria-label="Vehicle year">
+                            <option value="">Select year</option>
+                        </select></label><button class="btn btn-dark" onclick="findParts()">Find my parts
+                        </button></div>
+            </div>
+        </section>
+        <section class="wrap categories">
+            <div class="section-heading">
+                <div><span class="mini-label">FIND YOUR STARTING POINT</span>
+                    <h2>Every part. Every possibility.</h2>
+                </div><a href="#shop">Browse all categories </a>
+            </div>
+            <div class="category-grid"><button onclick="chooseCategory('Brakes')"><span
+                        class="category-symbol">◉</span><span>Brakes<small>Control every
+                            stop</small></span></button><button onclick="chooseCategory('Engine')"><svg class="category-symbol" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+</svg>
+<span>Engine parts<small>Power your
+                            journey</small></span></button><button onclick="chooseCategory('Suspension')"><svg class="category-symbol" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
+</svg>
+<span>Suspension<small>A smoother
+                            ride</small></span></button><button onclick="chooseCategory('Filters')"><svg class="category-symbol" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+</svg>
+<span>Filters<small>Keep things
+                            clean</small></span></button><button onclick="chooseCategory('Electrical')"><svg class="category-symbol" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+</svg>
+<span>Electrical<small>Stay
+                            connected</small></span></button><button onclick="chooseCategory('Fluids')"><svg class="category-symbol" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" />
+</svg>
+<span>Oils & fluids<small>Keep it running</small></span></button></div>
+        </section>
+        <section class="shop-section" id="shop">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div><span class="mini-label">THE EVERYDAY LINE-UP</span>
+                        <h2>Small parts. Big difference.</h2>
+                    </div>
+                </div>
+                <div class="filterbar"><label><span>Category</span><select id="categoryFilter"
+                            onchange="searchProducts()">
+                            <option value="all">All categories</option>
+                            <option>Brakes</option>
+                            <option>Engine</option>
+                            <option>Suspension</option>
+                            <option>Filters</option>
+                            <option>Electrical</option>
+                            <option>Fluids</option>
+                        </select></label><label><span>Price range</span><select id="priceFilter"
+                            onchange="searchProducts()">
+                            <option value="all">Any price</option>
+                            <option value="3000">Under KSh 3,000</option>
+                            <option value="7000">Under KSh 7,000</option>
+                            <option value="15000">Under KSh 15,000</option>
+                        </select></label><label class="check-label"><input id="stockFilter" type="checkbox"
+                            onchange="searchProducts()"> In stock only</label><button class="reset-link"
+                        onclick="resetFilters()">Reset filters</button><label class="sort-label"><span>Sort
+                            by</span><select id="sortSelect" onchange="searchProducts()">
+                            <option value="featured">Featured</option>
+                            <option value="price-asc">Price: low to high</option>
+                            <option value="price-desc">Price: high to low</option>
+                        </select></label></div>
+                <div class="results-line"><span id="resultCount">Explore our parts</span><span>Prices in Kenyan
+                        shillings (KSh)</span></div>
+                <div id="products" class="product-grid"></div>
+            </div>
+        </section>
+        <section class="wrap help-banner">
+            <div><span class="mini-label">SOME PARTS NEED A LITTLE EXPERTISE.</span>
+                <h2>Not sure what you need?<br>Let’s figure it out.</h2>
+                <p>Have a part number, a vehicle model, or just a question?<br>Start with a parts enquiry.</p><button
+                    class="btn btn-dark" onclick="openEnquiry()">Ask about a part</button>
+            </div>
+            <div class="help-art"><span>THE RIGHT FIT.<br>NO GUESSWORK.</span><b>↗</b>
+                <p>Your vehicle. Your parts. One hub.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="wrap footer-top"><a href="#" class="footer-logo">AUTOPARTS <strong>HUB.</strong><small>The right
+                    part. The road ahead.</small></a>
+            <div>
+                <h3>Explore</h3><a href="#shop">Shop all parts</a><button onclick="openTracker()">Track an
+                    order</button><button onclick="openAccount()">My account</button>
+            </div>
+            <div>
+                <h3>Here to help</h3><button onclick="openEnquiry()">Parts enquiries</button><button
+                    onclick="openModalInfo()">About this website</button><button onclick="openAdmin()">Admin workspace
+                    ↗</button>
+            </div>
+            </div>
+        </div>
+        <div class="wrap footer-bottom"><span>© 2026 AutoParts Hub</span><span>Designed to keep you
+                moving. </span></div>
+    </footer>
+    <dialog id="modal" aria-label="AutoParts Hub dialog">
+        <div id="modalContent"></div>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script>function openModalInfo() { document.getElementById('modalContent').innerHTML = '<div class="modal-header"><h2>Made for the road ahead.</h2><button onclick="closeModal()" aria-label="Close">×</button></div><p><strong>AutoParts Hub</strong> is a premier e-commerce platform featuring an integrated vehicle-finder system engineered to help you discover, verify, and secure the exact automotive components you need.</p><div class="notice">All transactions are processed through secure integration points. Customer support is available directly via our verified official contact channels.</div><p>Your products, orders, inventory records, and service enquiries are managed through a real-time data layer designed to keep your automotive procurement seamless, private, and efficient. The administrator workspace provides comprehensive tools for real-time order fulfillment, inventory control, and customer relation workflows.</p><p>Built for maximum scalability and speed, AutoParts Hub delivers highly verified fitment data, secure customer authentication profiles, and a robust payment processing framework built for modern drivers and mechanics.</p>'; document.getElementById('modal').showModal() }</script>
+</body>
+
+</html>
